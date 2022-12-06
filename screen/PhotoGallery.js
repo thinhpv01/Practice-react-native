@@ -1,5 +1,11 @@
 import { useCallback } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
@@ -12,6 +18,7 @@ import { setPhotoVisible } from "../app/feature/PhotoModalSlice";
 import PhotoDetailModal from "./PhotoDetailModal";
 import VImage from "./VImage";
 import { PinchGestureHandler } from "react-native-gesture-handler";
+import { PinchView } from "react-native-pinch-view";
 
 const { width } = Dimensions.get("window");
 
@@ -196,14 +203,16 @@ export default function PhotoGallery() {
           <View style={styles.gridContainer}>
             {data.map((item, index) => (
               <Animated.View key={index} style={[{ margin: 5 }, gridItemStyle]}>
-                <VImage
-                  onPress={onImagePress}
-                  style={[
-                    styles.image,
-                    photoData?.image.id == item.id && { opacity: 0 },
-                  ]}
-                  data={item}
-                />
+                <PinchView>
+                  <VImage
+                    onPress={onImagePress}
+                    style={[
+                      styles.image,
+                      photoData?.image.id == item.id && { opacity: 0 },
+                    ]}
+                    data={item}
+                  />
+                </PinchView>
               </Animated.View>
             ))}
           </View>
