@@ -66,13 +66,17 @@ const PhotoDetailModal = () => {
   const panGestureHandler = useAnimatedGestureHandler({
     onActive: ({ translationY }) => {
       animY.value = translationY;
+      animScale.value =
+        1 - (1 - ((height / 2 - animY.value) * 2) / height) * 0.2;
     },
     onEnd: ({ translationY, translationX }) => {
-      if (translationY > height * 0.35) {
+      if (translationY > height * 0.4 || translationY < -height * 0.4) {
         runOnJS(onBackPress)();
         animY.value = withTiming(0);
+        animScale.value = withTiming(1);
       } else {
         animY.value = withTiming(0);
+        animScale.value = withTiming(1);
       }
     },
   });
