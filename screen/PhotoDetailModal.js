@@ -91,7 +91,7 @@ const PhotoDetailModal = () => {
   const opacityStyle = useAnimatedStyle(() => ({
     opacity:
       anim.value *
-      interpolate(animY.value, [0, height * 0.3, height], [1, 0.5, 0]),
+      interpolate(animY.value, [-height * 0.3, 0, height * 0.3], [0.6, 1, 0.6]),
   }));
   const imageContainerStyle = useAnimatedStyle(() => {
     const isPortrait = imgSize.width < imgSize.height;
